@@ -16,9 +16,7 @@ import static com.sap.piper.cm.StepHelpers.getBackendTypeAndLogInfoIfCMIntegrati
 
 @Field def STEP_NAME = getClass().getName()
 
-@Field Set GENERAL_CONFIG_KEYS = STEP_CONFIG_KEYS
-
-@Field Set STEP_CONFIG_KEYS = [
+@Field Set GENERAL_CONFIG_KEYS = [
     'changeManagement',
     /**
       * When set to `false` the step will not fail in case the step is not in status 'in development'.
@@ -27,7 +25,11 @@ import static com.sap.piper.cm.StepHelpers.getBackendTypeAndLogInfoIfCMIntegrati
     'failIfStatusIsNotInDevelopment'
   ]
 
-@Field Set PARAMETER_KEYS = STEP_CONFIG_KEYS.plus('changeDocumentId')
+@Field Set STEP_CONFIG_KEYS = GENERAL_CONFIG_KEYS
+
+@Field Set PARAMETER_KEYS = STEP_CONFIG_KEYS.plus([
+    'changeDocumentId'
+])
 
 /**
  * Checks if a Change Document in SAP Solution Manager is in status 'in development'. The change document id is retrieved from the git commit history. The change document id

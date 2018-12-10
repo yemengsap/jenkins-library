@@ -11,13 +11,13 @@ import groovy.transform.Field
 @Field def STEP_NAME = getClass().getName()
 
 @Field Set GENERAL_CONFIG_KEYS = []
-@Field Set STEP_CONFIG_KEYS = [
+@Field Set STEP_CONFIG_KEYS = GENERAL_CONFIG_KEYS.plus([
     'applicationName',
     'buildTarget',
     'dockerImage',
     'extension',
     'mtaJarLocation'
-]
+])
 @Field Set PARAMETER_KEYS = STEP_CONFIG_KEYS.plus([
     'dockerOptions'
 ])

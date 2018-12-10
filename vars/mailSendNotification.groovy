@@ -6,19 +6,20 @@ import groovy.text.SimpleTemplateEngine
 import groovy.transform.Field
 
 @Field String STEP_NAME = getClass().getName()
-@Field Set GENERAL_CONFIG_KEYS = ['gitSshKeyCredentialsId']
-@Field Set STEP_CONFIG_KEYS = [
+@Field Set GENERAL_CONFIG_KEYS = [
+    'gitSshKeyCredentialsId'
+]
+@Field Set STEP_CONFIG_KEYS = GENERAL_CONFIG_KEYS.plus([
     'projectName',
     'buildResult',
     'gitUrl',
     'gitCommitId',
-    'gitSshKeyCredentialsId',
     'wrapInNode',
     'notifyCulprits',
     'notificationAttachment',
     'notificationRecipients',
     'numLogLinesInBody'
-]
+])
 @Field Set PARAMETER_KEYS = STEP_CONFIG_KEYS
 
 void call(Map parameters = [:]) {

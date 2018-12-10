@@ -11,9 +11,7 @@ import groovy.text.SimpleTemplateEngine
 @Field String STEP_NAME = getClass().getName()
 @Field Map CONFIG_KEY_COMPATIBILITY = [gitSshKeyCredentialsId: 'gitCredentialsId']
 
-@Field Set GENERAL_CONFIG_KEYS = STEP_CONFIG_KEYS
-
-@Field Set STEP_CONFIG_KEYS = [
+@Field Set GENERAL_CONFIG_KEYS = [
     'artifactType',
     'buildTool',
     'commitVersion',
@@ -29,7 +27,11 @@ import groovy.text.SimpleTemplateEngine
     'versioningTemplate'
 ]
 
-@Field Set PARAMETER_KEYS = STEP_CONFIG_KEYS.plus('gitCommitId')
+@Field Set STEP_CONFIG_KEYS = GENERAL_CONFIG_KEYS
+
+@Field Set PARAMETER_KEYS = STEP_CONFIG_KEYS.plus([
+    'gitCommitId'
+])
 
 void call(Map parameters = [:], Closure body = null) {
 
@@ -87,7 +89,7 @@ void call(Map parameters = [:], Closure body = null) {
                             :script.commonPipelineEnvironment.getGitSshUrl())
                 .withMandatoryProperty('gitSshUrl')
                 .use()
-            
+
             def gitConfig = []
 
             if(config.gitUserEMail) gitConfig.add("-c user.email=\"${config.gitUserEMail}\"")

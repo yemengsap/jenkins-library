@@ -18,11 +18,11 @@ import static com.sap.piper.cm.StepHelpers.getBackendTypeAndLogInfoIfCMIntegrati
 
 @Field Set GENERAL_CONFIG_KEYS = [
     'changeManagement'
-  ]
+]
 
 @Field Set STEP_CONFIG_KEYS = GENERAL_CONFIG_KEYS.plus([
-      'applicationId'
-    ])
+    'applicationId'
+])
 
 @Field Set PARAMETER_KEYS = STEP_CONFIG_KEYS.plus([
     'changeDocumentId',

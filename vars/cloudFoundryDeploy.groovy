@@ -7,10 +7,9 @@ import com.sap.piper.CfManifestUtils
 import groovy.transform.Field
 
 @Field String STEP_NAME = getClass().getName()
+@Field Map CONFIG_KEY_COMPATIBILITY = [cloudFoundry: [apiEndpoint: 'cfApiEndpoint', appName:'cfAppName', credentialsId: 'cfCredentialsId', manifest: 'cfManifest', org: 'cfOrg', space: 'cfSpace']]
 
-@Field Set GENERAL_CONFIG_KEYS = STEP_CONFIG_KEYS
-
-@Field Set STEP_CONFIG_KEYS = [
+@Field Set GENERAL_CONFIG_KEYS = [
     'cloudFoundry',
     'deployUser',
     'deployTool',
@@ -23,8 +22,10 @@ import groovy.transform.Field
     'mtaPath',
     'smokeTestScript',
     'smokeTestStatusCode',
-    'stashContent']
-@Field Map CONFIG_KEY_COMPATIBILITY = [cloudFoundry: [apiEndpoint: 'cfApiEndpoint', appName:'cfAppName', credentialsId: 'cfCredentialsId', manifest: 'cfManifest', org: 'cfOrg', space: 'cfSpace']]
+    'stashContent'
+]
+
+@Field Set STEP_CONFIG_KEYS = GENERAL_CONFIG_KEYS
 
 @Field Set PARAMETER_KEYS = STEP_CONFIG_KEYS
 
@@ -147,7 +148,7 @@ def deployCfNative (config) {
         }
 
         sh """#!/bin/bash
-            set +x  
+            set +x
             export HOME=${config.dockerWorkspace}
             cf login -u \"${username}\" -p '${password}' -a ${config.cloudFoundry.apiEndpoint} -o \"${config.cloudFoundry.org}\" -s \"${config.cloudFoundry.space}\"
             cf plugins

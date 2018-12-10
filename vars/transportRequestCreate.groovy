@@ -15,15 +15,15 @@ import hudson.AbortException
 
 @Field def STEP_NAME = getClass().getName()
 
-@Field GENERAL_CONFIG_KEYS = STEP_CONFIG_KEYS
-
-@Field Set STEP_CONFIG_KEYS = [
+@Field GENERAL_CONFIG_KEYS = [
     'changeManagement',
     'description',          // CTS
     'developmentSystemId',  // SOLMAN
     'targetSystem',         // CTS
     'transportType',        // CTS
-  ]
+]
+
+@Field Set STEP_CONFIG_KEYS = GENERAL_CONFIG_KEYS
 
 @Field Set PARAMETER_KEYS = STEP_CONFIG_KEYS.plus(['changeDocumentId'])
 

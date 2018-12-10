@@ -9,9 +9,7 @@ import groovy.text.SimpleTemplateEngine
 
 @Field String STEP_NAME = getClass().getName()
 
-@Field GENERAL_CONFIG_KEYS = STEP_CONFIG_KEYS
-
-@Field Set STEP_CONFIG_KEYS = [
+@Field GENERAL_CONFIG_KEYS = [
     'buildTool', //defines the tool which is used for executing the tests
     'containerPortMappings', //port mappings required for containers. This will only take effect inside a Kubernetes pod, format [[containerPort: 1111, hostPort: 1111]]
     'dockerEnvVars', //envVars to be set in the execution container if required
@@ -28,6 +26,8 @@ import groovy.text.SimpleTemplateEngine
     'stashContent', //list of stash names which are required to be unstashed before test run
     'testRepository' //if tests are in a separate repository, git url can be defined. For protected repositories the git ssh url is required
 ]
+
+@Field Set STEP_CONFIG_KEYS = GENERAL_CONFIG_KEYS
 
 @Field Set PARAMETER_KEYS = STEP_CONFIG_KEYS
 
