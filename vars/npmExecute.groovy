@@ -12,6 +12,10 @@ import groovy.transform.Field
      */
     'dockerImage',
     /**
+     * URL of default NPM registry
+     */
+    'defaultNpmRegistry',
+    /**
      * Which NPM command should be executed. Default value is 'run build'.
      */
     'npmCommand']
@@ -51,12 +55,15 @@ void call(Map parameters = [:], body) {
             }
             installCommand = fileExists('package-lock.json')?'ci':'install'
             dockerExecute(script: script, dockerImage: configuration.dockerImage, dockerOptions: configuration.dockerOptions) {
+                if (configuration.defaultNpmRegistry) {
+                    sh "npm config set registry ${configuration.defaultNpmRegistry}"
+                }
                 sh """
                         npm ${installCommand}
                         npm ${configuration.npmCommand}
                     """
+                body()
             }
-            body()
         } catch (Exception e) {
             println "Error while executing npm. Here are the logs:"
             sh "cat ~/.npm/_logs/*"
