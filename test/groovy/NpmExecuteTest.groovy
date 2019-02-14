@@ -41,6 +41,12 @@ class NpmExecuteTest extends BasePiperTest {
     }
 
     @Test
+    void testNpmExecuteWithClosure() {
+        stepRule.step.npmExecute(script: nullScript, dockerImage: 'node:8-stretch', npmCommand: 'run build') { }
+        assertEquals 'node:8-stretch', dockerExecuteRule.dockerParams.dockerImage
+    }
+
+    @Test
     void testNoPackageJson() {
         helper.registerAllowedMethod 'fileExists', [String], { false }
         thrown.expect AbortException
