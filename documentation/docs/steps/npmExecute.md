@@ -19,5 +19,5 @@ None
 ## Examples
 
 ```groovy
-npmExecute script: this, dockerImage: 'node:8-stretch', npmCommand: 'run build'
+npmExecute script: this, dockerImage: 'node:8-stretch', npmCommand: 'run build' {}
 ```

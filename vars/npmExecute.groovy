@@ -25,7 +25,7 @@ import groovy.transform.Field
  * Docker image, docker options and npm commands can be specified or configured.
  */
 @GenerateDocumentation
-void call(Map parameters = [:]) {
+void call(Map parameters = [:], body) {
     handlePipelineStepErrors(stepName: STEP_NAME, stepParameters: parameters) {
 
         final script = checkScript(this, parameters) ?: this
@@ -56,6 +56,7 @@ void call(Map parameters = [:]) {
                         npm ${configuration.npmCommand}
                     """
             }
+            body()
         } catch (Exception e) {
             println "Error while executing npm. Here are the logs:"
             sh "cat ~/.npm/_logs/*"
