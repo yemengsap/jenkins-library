@@ -232,7 +232,8 @@ steps:
     logSuccessfulMavenTransfers: false
   mtaBuild:
     buildTarget: 'NEO'
-    mtaJarLocation: 'mta.jar'
+    mtaJarLocation: '/opt/sap/mta/lib/mta.jar'
+    dockerImage: 'ppiper/mta-archive-builder'
   neoDeploy:
     dockerImage: 's4sdk/docker-neo-cli'
     deployMode: 'mta'
@@ -253,7 +254,6 @@ steps:
       - 'tests'
   npmExecute:
     dockerImage: 'node:8-stretch'
-    npmCommand: 'install'
   pipelineRestartSteps:
     sendMail: true
     timeoutInSeconds: 900
